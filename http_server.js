@@ -5,7 +5,7 @@ let default_config={};
 default_config.port = 10000;
 default_config.handler_root = path.resolve(__dirname,'../handlers');
 default_config.middleware_root = path.resolve(__dirname,'../middlewares');
-default_config.app_config = {};
+default_config.app_config = {'trust proxy': true};
 
 module.exports = function(config)
 {
@@ -47,7 +47,7 @@ function server_online(port)
 
 
 
-unit_test();
+// unit_test();
 function unit_test()
 {
     module.exports
