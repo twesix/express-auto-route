@@ -27,7 +27,7 @@ let config =
         handler_root: path.resolve('./handlers'),
         
         // 应用的监听端口
-        port: 10000
+        port: 10000,
         
         // 应用的配置，键值对的形式，会用app.set(key, value)来对应用进行配置
         app_config: 
