@@ -3,8 +3,8 @@ let express = require('express');
 
 let default_config={};
 default_config.port = 10000;
-default_config.handler_root = path.resolve(__dirname,'../handlers');
-default_config.middleware_root = path.resolve(__dirname,'../middlewares');
+default_config.handler_root = path.resolve(__dirname,'./handlers');
+default_config.middleware_root = path.resolve(__dirname,'./middlewares');
 default_config.app_config = {'trust proxy': true};
 
 module.exports = function(config)
@@ -24,15 +24,25 @@ module.exports = function(config)
         app.set(e, config.app_config[e]);
         console.log(`<<< done app configuration >>>`);
     });
+    console.log();
+    console.log();
 
     // 设置中间件
+    console.log(`[ middleware root ] ${config.middleware_root}`);
     require('./middleware')(app, config.middleware_root);
+    console.log();
+    console.log();
 
     // 设置路由
+    console.log(`[ handler root ] ${config.handler_root}`);
     app.use('/',require('./router')(config.handler_root));
+    console.log();
+    console.log();
 
     // 处理各种异常和错误
     require('./exception')(app);
+    console.log();
+    console.log();
 
     // 启动服务器
     app.listen(config.port, server_online(config.port));
