@@ -1,5 +1,5 @@
 # express-framework
-基于express的建议自动化应用配置框架
+基于express的简易自动化应用配置框架
 
 ## 用途
 
