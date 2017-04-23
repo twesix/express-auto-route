@@ -1,27 +1,42 @@
+let path = require('path');
 let express=require('express');
 let router=express.Router();
+let list_js_files = require('./util').list_js_files;
 
-router.use(function middleware(req,res,next)
+module.exports=function(handler_root)
 {
-    console.log(req.url);
-    console.log(req.method);
-    next();
-});
-//注意，中间件的放置顺序很重要，等同于执行顺序。而且，中间件必须放在HTTP动词方法之前，否则不会执行
-
-router.param('name',function(req,res,next,name)
-{
-    console.log(name);
-    req.name=name;
-    next();
-});
-//上面代码中，get方法为访问路径指定了name参数，param方法则是对name参数进行处理。注意，param方法必须放在HTTP动词方法之前。
-
-router.get('/', require('./handlers/index').get);
-
-router.route('/:test')
-    .get(require('./handlers/index').get)
-    .post(require('./handlers/index').get)
-;
-
-module.exports=router;
+    let js_files = list_js_files(handler_root);
+    console.log(`<<< router configuration >>>`);
+    js_files.forEach(function(e)
+    {
+        let handler = require(path.join(handler_root,e));
+        if(typeof handler.get === 'function')
+        {
+            if(e === 'index.js')
+            {
+                router.get('/', handler.get);
+                console.log(`GET  /`);
+            }
+            else
+            {
+                router.get('/'+e.split('.')[0], handler.get);
+                console.log(`GET  /${e.split('.')[0]}`);
+            }
+        }
+        if(typeof handler.post === 'function')
+        {
+            if(e === 'index.js')
+            {
+                router.post('/', handler.post);
+                console.log(`POST /`);
+            }
+            else
+            {
+                router.post('/'+e.split('.')[0], handler.post);
+                console.log(`POST /${e.split('.')[0]}`);
+            }
+        }
+    });
+    console.log(`<<< done router configuration >>>`);
+    return router;
+};
