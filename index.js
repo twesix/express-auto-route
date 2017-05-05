@@ -1,5 +1,6 @@
 let path = require('path');
 let express = require('express');
+let list_js_files = require('./util').list_js_files;
 
 let default_config={};
 default_config.port = 10000;
@@ -12,6 +13,8 @@ module.exports = function(config)
     config = Object.assign(default_config, config);
     config.handler_root = path.resolve(config.handler_root);
     config.middleware_root = path.resolve(config.middleware_root);
+    config.handler_file_list = list_js_files(config.handler_root);
+    config.middleware_file_list = list_js_files(config.middleware_root);
 
     let app = express();
 
@@ -29,7 +32,7 @@ module.exports = function(config)
 
     // 设置中间件
     console.log(`[ middleware root ] ${config.middleware_root}`);
-    require('./middleware')(app, config.middleware_root);
+    require('./middleware')(app, config);
     console.log();
     console.log();
 
@@ -57,7 +60,7 @@ function server_online(port)
 
 
 
-// unit_test();
+unit_test();
 function unit_test()
 {
     module.exports

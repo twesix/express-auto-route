@@ -6,7 +6,7 @@ module.exports.list_js_files = function(dir)
     let js_files = [];
     file_list.forEach(function(e)
     {
-        if(e.split('.')[1] === 'js')
+        if(e.split('.').pop() === 'js')
         {
             js_files.push(e);
         }

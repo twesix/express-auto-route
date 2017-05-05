@@ -1,5 +1,8 @@
-module.exports = function(req, res, next)
+module.exports = function(config)
 {
-    console.log(`[ ${new Date()} ] ( ${req.ip} ) ${req.method} ${req.path}`);
-    next();
+    return function(req, res, next)
+    {
+        console.log(`[ ${new Date()} ] ( ${req.ip} ) ${req.method} ${req.path}`);
+        next();
+    }
 };
