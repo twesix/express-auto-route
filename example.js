@@ -27,4 +27,4 @@ app.set_routes
 // comment this if you want to handle 404 and error in your own way
 app.handle_exceptions();
 
-app.start();
+app.start(/* 10000, function(){ console.log('server online !') } */);

@@ -1,7 +1,8 @@
 {
   "name": "express-framework",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "validator": "^7.0.0"
   }
 }

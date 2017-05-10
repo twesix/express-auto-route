@@ -72,13 +72,33 @@ function build_param_checker(rule)
             {
                 continue;
             }
-            if(rule[ param ].required &&  ! query[ param ])
+            if( ! rule[ param ].required)
+            {
+                continue;
+            }
+            if( ! query[ param ])
             {
                 res.status(200).json
                 (
                     {
                         status: 'param_check_failed',
-                        message: `parameter [ ${ param } ] is not valid or does not exist`
+                        message: `parameter [ ${ param } ] does not exist`
+                    }
+                );
+                pass = false;
+                break;
+            }
+            if(typeof rule[ param ].validator !== 'function')
+            {
+                continue;
+            }
+            if( ! rule[ param ].validator(query[ param ]))
+            {
+                res.status(200).json
+                (
+                    {
+                        status: 'param_check_failed',
+                        message: `parameter [ ${ param } ] is not valid`
                     }
                 );
                 pass = false;

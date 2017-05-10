@@ -1,3 +1,5 @@
+const validator = require('validator');
+
 module.exports.get=function(req,res)
 {
     res.status(200).json({status: 'test handler'});
@@ -7,11 +9,13 @@ module.exports.get.params =
     {
         param_a:
             {
-                required: true
+                required: true,
+                validator: validator.isEmail
             },
         param_b:
             {
-                required: true
+                required: true,
+                validator: validator.isIP
             }
     };
 
