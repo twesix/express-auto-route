@@ -2,7 +2,8 @@ const validator = require('validator');
 
 module.exports.get=function(req,res)
 {
-    res.status(200).json({status: 'test handler'});
+    console.log(req.vars);
+    res.status(200).json({ status: 'test handler' });
 };
 
 module.exports.get.params =

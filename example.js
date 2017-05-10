@@ -14,6 +14,15 @@ app.set('trust proxy', true);
 // a simple access log middleware, use it or not as your will
 app.enable_access_log();
 
+// inject some global object into the req object
+app.set_vars
+(
+    {
+        var_: 'var 1',
+        var_2: 'var 2'
+    }
+);
+
 app.set_routes
 (
     // map the handler dir to request path
