@@ -1,6 +1,16 @@
+// const MongoClient = require('mongodb').MongoClient
+// const url = 'mongodb://localhost:27017'
+//
+// const getDB = async function()
+// {
+//     return (await MongoClient.connect(url)).db('test')
+// }
 
-
-module.exports.get=function(req,res)
+async function save_mongodb(req, res)
 {
-    res.status(200).json({ status: 'test handler' });
-};
+    // $db = await getDB()
+    // const res = await $db.collection('test').insertOne({date: new Date()})
+    res.status(200).json({ ok: true })
+}
+
+module.exports.get = [save_mongodb]
