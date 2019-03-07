@@ -7,8 +7,7 @@ module.exports = function()
 
     app.__proto__.set_router = require('./router')
 
-    app.__proto__.enable_access_log = enable_access_log
-    app.enable_access_log() // 默认开启日志记录
+    app.use('/', access_log) // 默认开启日志记录
 
     app.__proto__.start = function(port = 10000, online = server_online)
     {
@@ -18,10 +17,18 @@ module.exports = function()
     return app;
 };
 
-
-function enable_access_log()
+function access_log(req, res, next)
 {
-    this.use('/', require('./middlewares/access_log')());
+    console.log('=== request log ===')
+    console.log(`${new Date()} || ${req.ip} || ${req.method} || ${req.path}`);
+    console.log('--- query ---')
+    console.log(req.query)
+    console.log('--- end query --- ')
+    console.log('--- body ---')
+    console.log(req.body)
+    console.log('--- end body ---')
+    console.log('=== end request log ===')
+    next();
 }
 
 

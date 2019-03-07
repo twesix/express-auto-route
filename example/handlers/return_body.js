@@ -1,9 +1,9 @@
-module.exports.get=function(req,res)
-{
-    res.status(200).json({ status: 'test handler' });
-};
+const express = require('express')
 
-module.exports.post=function(req,res)
+module.exports.post = []
+
+module.exports.post.push(express.urlencoded())
+module.exports.post.push(function(req,res)
 {
-    res.status(200).json({status: 'test handler'});
-};
+    res.json(req.body)
+})

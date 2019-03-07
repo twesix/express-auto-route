@@ -33,11 +33,11 @@ function build_router(handler_file_list)
             request_path = request_path + file_name_arr.join('/')
         }
         console.log(`${request_path} ==> ${file_path}`);
-        if(typeof handler.get === 'function')
+        if(handler.get)
         {
             router.get(request_path, handler.get);
         }
-        if(typeof handler.post === 'function')
+        if(handler.post)
         {
             router.post(request_path, handler.post);
         }
