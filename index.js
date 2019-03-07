@@ -8,6 +8,7 @@ module.exports = function()
     app.__proto__.set_router = require('./router')
 
     app.use('/', access_log) // 默认开启日志记录
+    app.use('/', set_header) // HTTP Response Header
 
     app.__proto__.start = function(port = 10000, online = server_online)
     {
@@ -31,6 +32,11 @@ function access_log(req, res, next)
     next();
 }
 
+function set_header(req, res, next)
+{
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    next()
+}
 
 function server_online(port)
 {
