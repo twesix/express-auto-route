@@ -1,7 +1,7 @@
-let path = require('path');
-let express=require('express');
-let router=express.Router();
-let list_js_files = require('./util').list_js_files;
+const path = require('path');
+const express=require('express');
+const router=express.Router();
+const list_js_files = require('./util').list_js_files;
 
 module.exports = function(configs)
 {
