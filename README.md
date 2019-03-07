@@ -1,8 +1,5 @@
-# express-framework
+# express-auto-route
 基于express的简易自动化应用配置框架
-
-## Languages
-[English](README_en.md)
 
 ## 用途
 
