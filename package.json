@@ -1,8 +1,15 @@
 {
-  "name": "express-auto-route",
+  "name": "@twesix/express-auto-route",
   "version": "1.0.0",
+  "author": "twesix",
+  "license": "MIT",
+  "homepage": "https://github.com/twesix/express-auto-route",
   "dependencies": {
     "express": "^4.15.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twesix/express-auto-route.git"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
