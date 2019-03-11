@@ -1,20 +1,25 @@
 const path = require('path')
 const multer = require('multer')
-const dest  =path.resolve(__dirname, '../tmp')
+const dest  =path.resolve(__dirname, '../uploads')
 const upload= multer({dest: dest})
 const fs = require('fs')
 
 function file_upload(req,res)
 {
-    const filetype = req.file.originalname.split('.').pop()
-    const savepath = req.file.path + '.' + filetype
-    const savefilename = req.file.filename + '.' + filetype
-    fs.renameSync(req.file.path, savepath)
-    req.file.savepath = savepath
-    req.file.savefilename = savefilename
-    console.log(req.file)
-    res.json(req.file)
+    const files = req.files
+    for ( let i = 0; i < files.length; i ++)
+    {
+        const file = files[i]
+        const filetype = file.originalname.split('.').pop()
+        const savepath = file.path + '.' + filetype
+        const savefilename = file.filename + '.' + filetype
+        fs.renameSync(file.path, savepath)
+        file.savepath = savepath
+        file.savefilename = savefilename
+    }
+    console.log(files)
+    res.json({ok: true, files: files})
 }
 
-module.exports.post = [upload.single('filename'), file_upload]
+module.exports.post = [upload.array('file'), file_upload]
 

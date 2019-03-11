@@ -5,9 +5,70 @@
     <title>file upload</title>
 </head>
 <body>
-<form action="//localhost:10000/file_upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="filename">
-    <button type="submit">Submit</button>
+
+<form id="file_form" method="post" enctype="multipart/form-data">
+    <input type="file" id="file_input" name="file" oninput="update_preview()" multiple>
 </form>
+<div id="file_preview"></div>
+<button onclick="upload()">上传</button>
+
+<script>
+    function update_preview()
+    {
+        const file_input = document.getElementById('file_input')
+        const filesArr = file_input.files
+        const file_preview = document.getElementById('file_preview')
+        file_preview.innerHTML = ''
+
+        for (let i = 0; i < filesArr.length; i ++)
+        {
+            const reader = new FileReader()
+            reader.addEventListener('load', function()
+            {
+                const img = new Image()
+                img.src = reader.result
+                img.width = 100
+                img.style.margin = '20px'
+                file_preview.appendChild(img)
+
+            })
+            reader.readAsDataURL(filesArr[i])
+        }
+    }
+    function upload()
+    {
+        const file_form = document.getElementById('file_form')
+        const file_input = document.getElementById('file_input')
+        const filesArr = file_input.files
+
+        if (filesArr.length === 0)
+        {
+            alert('请选择要上传的文件')
+        }
+        else
+        {
+            const formData = new FormData(file_form)
+            console.log(formData)
+            const xhr = new XMLHttpRequest()
+            const url = '//localhost:10000/file_upload'
+            xhr.open('POST', url)
+            xhr.responseType = 'json'
+            xhr.onload = function()
+            {
+                const res = xhr.response
+                if (res.ok)
+                {
+                    alert('上传成功')
+                    file_form.reset()
+                }
+                else
+                {
+                    alert('上传失败')
+                }
+            }
+            xhr.send(formData)
+        }
+    }
+</script>
 </body>
 </html>
