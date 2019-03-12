@@ -1,5 +1,6 @@
 const ear = require('..');
 const path = require('path');
+const express = require('express')
 
 const app = ear();
 // now app is just the object returned by calling express()
@@ -13,5 +14,7 @@ app.set('trust proxy', true);
 
 // handler_dir_path must be absolute path
 app.set_router(path.resolve(__dirname, 'handlers'))
+
+app.use('/static', express.static(path.resolve(__dirname, 'static')))
 
 app.start(/* 10000, function(){ console.log('server online !') } */)

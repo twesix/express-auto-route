@@ -6,6 +6,9 @@
 在使用express开发后台应用的过程中，总是会去做一些重复性的工作，比如配置路由，中间件，异常和错误处理。
 为了简化开发过程，减少代码的重复，我把在使用express时的一些公共代码抽出来，写成了这个独立的模块。
 
+导入了这个框架之后, 再基于express开发应用时只需要编写对应路径的处理函数
+路径的配置, 错误的处理, 静态文件的serve都不再需要去关注
+
 ## 用法
 
 ```javascript
@@ -39,4 +42,26 @@ app.set_router(path.resolve(__dirname, 'handlers'))
  */
 
 app.start(/* 10000, function(){ console.log('server online !') } */)
+```
+
+## handler的编写
+
+```javascript
+// handlers 目录内部每一个文件都会被映射到路径上去
+// 每个文件都是一个路径对应的处理模块
+// 每个文件的module.exports.METHOD必须是数组
+// 代表对应路径的一系列处理函数
+// 数组内的处理函数会按序执行
+
+// return_body.js
+
+const express = require('express')
+
+module.exports.post = []
+
+module.exports.post.push(express.urlencoded())
+module.exports.post.push(function(req,res)
+{
+    res.json(req.body)
+})
 ```
