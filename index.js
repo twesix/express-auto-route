@@ -20,15 +20,19 @@ module.exports = function()
 
 function access_log(req, res, next)
 {
-    console.log('=== request log ===')
-    console.log(`${new Date()} || ${req.ip} || ${req.method} || ${req.path}`);
-    console.log('--- query ---')
+    console.log(' ')
+    console.log('############### start request log')
+    console.log(' ')
+    console.log(`${new Date().toLocaleString()} || ${req.ip} || ${req.method} || ${req.path}`);
+    console.log(' ')
+    console.log('@@@query')
     console.log(req.query)
-    console.log('--- end query --- ')
-    console.log('--- body ---')
+    console.log(' ')
+    console.log('@@@body')
     console.log(req.body)
-    console.log('--- end body ---')
-    console.log('=== end request log ===')
+    console.log(' ')
+    console.log('############### end request log')
+    console.log(' ')
     next();
 }
 

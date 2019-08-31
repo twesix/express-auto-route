@@ -12,8 +12,9 @@ function build_router(handler_file_list)
 {
     // 文件列表是绝对路径
 
-    console.log()
-    console.log('=== configuring router ===')
+    console.log('')
+    console.log('$$$$$$$$$$$$$$$ start configuring router')
+    console.log('')
     const router=express.Router();
     handler_file_list.forEach(function(file_path)
     {
@@ -32,7 +33,7 @@ function build_router(handler_file_list)
             file_name_arr.pop()
             request_path = request_path + file_name_arr.join('/')
         }
-        console.log(`${request_path} ==> ${file_path}`);
+        console.log(`${paddingRight(request_path)} ==> ${file_path}`);
         if(handler.get)
         {
             router.get(request_path, handler.get);
@@ -42,8 +43,9 @@ function build_router(handler_file_list)
             router.post(request_path, handler.post);
         }
     });
-    console.log('=== done configuring router ===')
-    console.log()
+    console.log('')
+    console.log('$$$$$$$$$$$$$$$ done configuring router')
+    console.log('')
     return router;
 }
 function test_build_router()
@@ -77,3 +79,15 @@ function test_list_js_files()
     console.log(list_js_files('.'));
 }
 // test_list_js_files()
+
+function paddingRight(str, len = 30, padding = ' ') {
+    while(str.length < len) {
+        str += padding
+    }
+    return str
+}
+
+function test_paddingRight() {
+    console.log(paddingRight('/hello') + '=> handlers/hello.js')
+}
+// test_paddingRight()

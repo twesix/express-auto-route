@@ -32,13 +32,15 @@ app.set_router(path.resolve(__dirname, 'handlers'))
 
 // 例如下面的映射方式
 /*
-=== configuring router ===
-/file_upload ==> handlers\file_upload.js
-/ ==> handlers\index.js
-/return_body ==> handlers\return_body.js
-/save_mongodb ==> handlers\save_mongodb.js
-/test/subpath ==> handlers\test.subpath.js
-=== done configuring router ===
+$$$$$$$$$$$$$$$ start configuring router
+
+/file_upload                   ==> E:\0000\twesix\express-auto-route\example\handlers\file_upload.js
+/                              ==> E:\0000\twesix\express-auto-route\example\handlers\index.js
+/return_body                   ==> E:\0000\twesix\express-auto-route\example\handlers\return_body.js
+/save_mongodb                  ==> E:\0000\twesix\express-auto-route\example\handlers\save_mongodb.js
+/test/subpath                  ==> E:\0000\twesix\express-auto-route\example\handlers\test.subpath.js
+
+$$$$$$$$$$$$$$$ done configuring router
  */
 
 app.start(/* 10000, function(){ console.log('server online !') } */)
