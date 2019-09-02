@@ -1,5 +1,14 @@
 # express-auto-route
+[![npm badge](https://img.shields.io/npm/v/@twesix/express-auto-route.svg?style=flat-square)](https://www.npmjs.com/package/@twesix/express-auto-route)
+[![npm downloads](https://img.shields.io/npm/dm/@twesix/express-auto-route.svg?style=flat-square)](https://www.npmjs.com/package/@twesix/express-auto-route)
+[![license](https://img.shields.io/npm/l/@twesix/express-auto-route.svg?style=flat-square)](https://www.npmjs.com/package/@twesix/express-auto-route)
+
 基于express的简易自动化应用配置框架
+
+## 安装
+```bash
+npm install --save @twesix/express-auto-route
+```
 
 ## 用途
 
@@ -12,7 +21,7 @@
 ## 用法
 
 ```javascript
-const ear = require('express-auto-route');
+const ear = require('@twesix/express-auto-route');
 const path = require('path');
 
 const app = ear();
