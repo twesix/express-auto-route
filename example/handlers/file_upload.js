@@ -21,5 +21,5 @@ function file_upload(req,res)
     res.json({ok: true, files: files})
 }
 
-module.exports.post = [upload.array('file'), file_upload]
+module.exports.post = [file_upload]
 

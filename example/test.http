@@ -1,0 +1,45 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+### json
+POST http://localhost:10000/
+content-type: application/json
+
+{
+  "bodyType": "json"
+}
+### application/octet-stream
+POST http://localhost:10000/
+content-type: application/octet-stream
+
+{
+  "bodyType": "json"
+}
+### text/plain
+POST http://localhost:10000/
+content-type: application/json
+
+{
+  "bodyType": "json"
+}
+### application/x-www-form-urlencoded
+POST http://localhost:10000/
+content-type: application/x-www-form-urlencoded
+
+a=a&b=b
+### */x-www-form-urlencoded, not work
+POST http://localhost:10000/
+content-type: */x-www-form-urlencoded
+
+a=a&b=b
+### urlencoded, not work
+POST http://localhost:10000/
+content-type: urlencoded
+
+a=a&b=b
+###

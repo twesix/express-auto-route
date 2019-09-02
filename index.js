@@ -1,4 +1,9 @@
-let express = require('express')
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+const multer = require('multer')
+const dest  =path.resolve(__dirname, '../uploads')
+const upload= multer({dest: dest})
 
 module.exports = function()
 {
@@ -7,8 +12,13 @@ module.exports = function()
 
     app.__proto__.set_router = require('./router')
 
-    app.use('/', access_log) // 默认开启日志记录
-    app.use('/', set_header) // HTTP Response Header
+    app.use(upload.any())
+    app.use(bodyParser.urlencoded({extended: true}))
+    app.use(bodyParser.text())
+    app.use(bodyParser.raw())
+    app.use(bodyParser.json())
+    app.use(access_log) // 默认开启日志记录
+    app.use(set_header) // HTTP Response Header
 
     app.__proto__.start = function(port = 10000, online = server_online)
     {
@@ -30,6 +40,9 @@ function access_log(req, res, next)
     console.log(' ')
     console.log('@@@body')
     console.log(req.body)
+    console.log(' ')
+    console.log('@@@files')
+    console.log(req.files)
     console.log(' ')
     console.log('############### end request log')
     console.log(' ')
